@@ -1,5 +1,14 @@
-// console.log("Hello from My first Node js Applicaiton");
+const http = require("http");
 
-const fs = require("fs");
+const requesthandler = (req, res) => {
+  if (req.method == "GET" && req.url == "/") {
+    console.log(req);
+    res.end("Hello World");
+  }
+};
 
-fs.writeFileSync("Hello.txt", "Helo from this is a node js file write");
+const server = http.createServer(requesthandler);
+
+server.listen("3000", () => {
+  console.log("server is running on port 3000");
+});
