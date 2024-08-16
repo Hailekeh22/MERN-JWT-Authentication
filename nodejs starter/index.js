@@ -1,14 +1,13 @@
-const http = require("http");
+const express = require("express");
 
-const requesthandler = (req, res) => {
-  if (req.method == "GET" && req.url == "/") {
-    console.log(req);
-    res.end("Hello World");
-  }
-};
+const app = express();
+const port = 3434;
 
-const server = http.createServer(requesthandler);
+app.get("/", (req, res) => {
+  res.send("Hello WOrld");
+  console.log("endpoint accessed");
+});
 
-server.listen("3000", () => {
-  console.log("server is running on port 3000");
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
