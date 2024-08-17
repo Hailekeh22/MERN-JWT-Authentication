@@ -4,10 +4,10 @@ import axios from "axios";
 
 const Signup = () => {
   const [inputValues, setInputValues] = useState({
-    firstname: "",
-    lastname: "",
+    fname: "",
+    lname: "",
     email: "",
-    password: "",
+    pwd: "",
   });
   const [inputs, setInputs] = useState("");
   const navigate = useNavigate();
@@ -28,13 +28,13 @@ const Signup = () => {
         .post(apilink, inputValues)
         .then((res) => {
           console.log(res.data);
-          alert("Verification Number has been sent to your email.");
-          navigate("/verify", { state: { email: inputValues.email } });
+          alert("Sucessfully Added to the database");
+          navigate("/login");
           setInputValues({
-            firstname: "",
-            lastname: "",
+            fname: "",
+            lname: "",
             email: "",
-            password: "",
+            pwd: "",
           });
         })
         .catch((e) => {
@@ -57,7 +57,7 @@ const Signup = () => {
           <input
             type="text"
             className=" rounded-md p-1"
-            name="firstname"
+            name="fname"
             value={inputValues.firstname}
             onChange={handlechange}
           ></input>
@@ -65,7 +65,7 @@ const Signup = () => {
           <input
             type="text"
             className=" rounded-md p-1"
-            name="lastname"
+            name="lname"
             value={inputValues.lastname}
             onChange={handlechange}
           ></input>
@@ -81,8 +81,8 @@ const Signup = () => {
           <input
             type="password"
             className=" rounded-md p-1"
-            name="password"
-            value={inputValues.password}
+            name="pwd"
+            value={inputValues.pwd}
             onChange={handlechange}
           ></input>
           <button type="submit" className=" primary-btn mt-3">

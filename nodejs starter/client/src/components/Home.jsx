@@ -9,17 +9,20 @@ const Home = () => {
   useEffect(() => {
     const check = async () => {
       try {
+        const token = localStorage.getItem("token");
         const link = import.meta.env.VITE_homeroute;
-        await axios.get(link, { withCredentials: true }).then((res) => {
-          console.log("Auth Check Response:", res.data);
+        console.log(token);
 
-          if (res.data.loggedIn) {
+        if (!token) {
+          navigate("/login");
+        }
+
+        await axios
+          .get(link, { headers: { Authorization: `Baerer ${token}` } })
+          .then((res) => {
+            console.log("Auth Check Response:", res.data);
             setAuthenticated(true);
-          } else {
-            setAuthenticated(false);
-            navigate("/login");
-          }
-        });
+          });
       } catch (e) {
         console.log(e);
         navigate("/login");
@@ -29,13 +32,14 @@ const Home = () => {
   }, [navigate]);
 
   const logout = () => {
-    const link = import.meta.env.VITE_Logoutroute;
-    axios.post(link, { withCredentials: true }).then((res) => {
-      console.log(res.data);
-      setAuthenticated(false);
-      navigate("/login");
-    });
+    localStorage.removeItem("token");
+    setAuthenticated(false);
+    navigate("/login");
   };
+
+  if (!authenticated) {
+    return null;
+  }
 
   return (
     <div className=" h-screen w-full bg-amber-700 flex items-center justify-center">

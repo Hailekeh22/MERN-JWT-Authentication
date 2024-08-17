@@ -3,11 +3,12 @@ const { User } = require("../schema/userSchema");
 const { closeCon } = require("../utils/closeDb");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { secrete } = require("../constants");
+const { returnSecrete } = require("../constants");
 
 const login = async (req, res) => {
   const { email, pwd } = req.body;
 
+  const secrete = await returnSecrete();
   try {
     await connetDb();
     const user = await User.findOne({ email: email });

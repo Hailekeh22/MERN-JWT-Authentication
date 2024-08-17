@@ -5,7 +5,7 @@ import axios from "axios";
 const Login = () => {
   const [credentials, setCredentials] = useState({
     email: "",
-    password: "",
+    pwd: "",
   });
 
   const navigate = useNavigate();
@@ -13,16 +13,18 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
     const apilink = import.meta.env.VITE_loginbackend;
-    axios.post(apilink, credentials, { withCredentials: true }).then((res) => {
-      if (res.data.login) {
-        navigate("/Home");
+
+    axios.post(apilink, credentials).then((res) => {
+      if (res) {
+        const token = localStorage.setItem("token", res.data.token);
+        navigate("/home");
       } else {
         alert("Login Error");
       }
-    });
-    setCredentials({
-      email: "",
-      password: "",
+      setCredentials({
+        email: "",
+        pwd: "",
+      });
     });
   };
 
@@ -54,8 +56,8 @@ const Login = () => {
           <input
             type="password"
             className=" rounded-md p-1"
-            name="password"
-            value={credentials.password}
+            name="pwd"
+            value={credentials.pwd}
             onChange={handlechanges}
           ></input>
           <button type="submit" className=" primary-btn mt-3">

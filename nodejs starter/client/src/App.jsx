@@ -5,13 +5,10 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import NavBar from "./components/NavBar";
 import Index from "./components/Index";
-import "@mantine/core/styles.css";
-
-import { MantineProvider } from "@mantine/core";
 
 const App = () => {
   return (
-    <MantineProvider>
+    <>
       <NavBar />
       <Routes>
         <Route path="/" element={<Index />} />
@@ -19,7 +16,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
       </Routes>
-    </MantineProvider>
+    </>
   );
 };
 
