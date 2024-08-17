@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .primary-btn {
+        @apply bg-gradient-to-r 
+        from-orange-400 bg-orange-500 hover:scale-105 duration-200 text-white rounded-md py-2 px-4;
+    }
+}
