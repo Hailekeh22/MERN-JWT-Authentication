@@ -1,12 +1,14 @@
+const bodyParser = require("body-parser");
 const express = require("express");
+const { SignUpRoute } = require("./routes/signUpRoute");
 
+//middlewared
 const app = express();
 const port = 3434;
+app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello WOrld");
-  console.log("endpoint accessed");
-});
+//routes
+app.use(SignUpRoute);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
