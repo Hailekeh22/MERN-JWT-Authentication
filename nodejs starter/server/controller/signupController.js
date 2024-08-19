@@ -8,7 +8,7 @@ const registerUser = async (req, res) => {
 
   const hasedPwd = await bcrypt.hash(pwd, 12);
 
-  connetDb();
+  await connetDb();
   const newUser = new User({
     fname: fname,
     lname: lname,
@@ -19,7 +19,7 @@ const registerUser = async (req, res) => {
   const saveUser = await newUser.save();
   if (saveUser) {
     res.send("Sucessfully Added");
-    closeCon();
+    await closeCon();
   } else {
     res.send("Registration failed");
   }

@@ -18,7 +18,7 @@ const Home = () => {
         }
 
         await axios
-          .get(link, { headers: { Authorization: `Baerer ${token}` } })
+          .get(link, { headers: { Authorization: `Bearer ${token}` } })
           .then((res) => {
             console.log("Auth Check Response:", res.data);
             setAuthenticated(true);
@@ -29,7 +29,7 @@ const Home = () => {
       }
     };
     check();
-  }, [navigate]);
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("token");

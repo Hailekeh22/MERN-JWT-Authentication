@@ -9,7 +9,7 @@ const connetDb = async () => {
       console.log("Can not connect to the database");
     }
   } catch (e) {
-    console.log(e);
+    console.log("Error");
   }
 };
 

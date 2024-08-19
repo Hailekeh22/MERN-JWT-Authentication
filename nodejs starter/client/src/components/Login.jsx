@@ -14,9 +14,10 @@ const Login = () => {
     e.preventDefault();
     const apilink = import.meta.env.VITE_loginbackend;
 
-    axios.post(apilink, credentials).then((res) => {
+    axios.post(apilink, credentials).then(async (res) => {
       if (res) {
-        const token = localStorage.setItem("token", res.data.token);
+        const token = res.data.token;
+        localStorage.setItem("token", token);
         navigate("/home");
       } else {
         alert("Login Error");

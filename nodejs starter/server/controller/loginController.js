@@ -3,12 +3,14 @@ const { User } = require("../schema/userSchema");
 const { closeCon } = require("../utils/closeDb");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { returnSecrete } = require("../constants");
+const { secrete } = require("../constants");
 
 const login = async (req, res) => {
   const { email, pwd } = req.body;
 
-  const secrete = await returnSecrete();
+  const jwtsecrete = await secrete;
+  console.log("from Login COnt" + jwtsecrete);
+
   try {
     await connetDb();
     const user = await User.findOne({ email: email });
@@ -23,13 +25,12 @@ const login = async (req, res) => {
       return res.send("Incorect password");
     }
 
-    closeCon();
-
-    const token = jwt.sign({ email }, secrete, { expiresIn: "100h" });
-
+    const token = jwt.sign({ email }, jwtsecrete, { expiresIn: "100h" });
     res.json({ token });
   } catch (e) {
-    console.log(e);
+    console.log("Error Happened");
+  } finally {
+    closeCon();
   }
 };
 
