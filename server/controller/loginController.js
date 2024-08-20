@@ -9,7 +9,6 @@ const login = async (req, res) => {
   const { email, pwd } = req.body;
 
   const jwtsecrete = await secrete;
-  console.log("from Login COnt" + jwtsecrete);
 
   try {
     await connetDb();

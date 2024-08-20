@@ -5,9 +5,10 @@ const { loginRoute } = require("./routes/loginRoute");
 const { homeRoute } = require("./routes/homeRoute");
 const cors = require("cors");
 
-//middlewared
-const app = express();
 const port = 3434;
+const app = express();
+
+//middlewared
 app.use(bodyParser.json());
 app.use(cors());
 

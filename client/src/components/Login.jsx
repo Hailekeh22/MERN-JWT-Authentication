@@ -15,12 +15,12 @@ const Login = () => {
     const apilink = import.meta.env.VITE_loginbackend;
 
     axios.post(apilink, credentials).then(async (res) => {
-      if (res) {
+      if (res.data == "Incorect password") {
+        alert("Incorrect Password!");
+      } else if (res.data.token) {
         const token = res.data.token;
         localStorage.setItem("token", token);
         navigate("/home");
-      } else {
-        alert("Login Error");
       }
       setCredentials({
         email: "",

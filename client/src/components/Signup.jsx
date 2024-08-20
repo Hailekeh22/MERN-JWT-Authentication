@@ -28,7 +28,7 @@ const Signup = () => {
         .post(apilink, inputValues)
         .then((res) => {
           console.log(res.data);
-          alert("Sucessfully Added to the database");
+          alert("Sucessfully Registerd");
           navigate("/login");
           setInputValues({
             fname: "",

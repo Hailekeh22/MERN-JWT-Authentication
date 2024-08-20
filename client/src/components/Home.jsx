@@ -11,7 +11,6 @@ const Home = () => {
       try {
         const token = localStorage.getItem("token");
         const link = import.meta.env.VITE_homeroute;
-        console.log(token);
 
         if (!token) {
           navigate("/login");
